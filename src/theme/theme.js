@@ -11,6 +11,9 @@ const theme = createTheme({
     textfield: {
       main: "#F7F7F7",
     },
+    highlight: {
+      main: "#969191",
+    },
   },
   typography: {
     fontFamily: '"Satoshi", "Arial", sans-serif',
