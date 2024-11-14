@@ -1,35 +1,53 @@
-import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import React from "react";
+import { Box, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
-
-  const handleSearch = () => {
-    // Here you can handle the search logic, e.g., filter data or call an API
-    console.log("Searching for:", searchTerm);
-  };
-
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-      {/* Input field for the search term */}
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        width: "680px",
+        height: "64px",
+        borderRadius: "50px",
+        backgroundColor: "#f5f5f5",
+        overflow: "hidden",
+      }}
+    >
       <TextField
-        label="Search"
+        placeholder="Search for products"
         variant="outlined"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Update the state with the input value
-        sx={{ flex: 1 }}
+        fullWidth
+        InputProps={{
+          sx: {
+            height: "100%",
+            paddingRight: "0", // Removes padding to align with button
+            borderRadius: "50px 0 0 50px", // Rounded corners on the left
+            backgroundColor: "transparent",
+          },
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{
+                  borderRadius: "50px",
+                  height: "45px",
+                  padding: "0 24px",
+                  color: "#fff",
+                  boxShadow: "none",
+                  width: "180px",
+                  marginRight: 1,
+                }}
+                startIcon={<SearchIcon />}
+              >
+                Search
+              </Button>
+            </InputAdornment>
+          ),
+        }}
       />
-
-      {/* Search button */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSearch} // Trigger search on button click
-        startIcon={<SearchIcon />}
-      >
-        Search
-      </Button>
     </Box>
   );
 }

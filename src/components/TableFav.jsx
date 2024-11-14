@@ -1,8 +1,6 @@
-// src/components/ProductTable.js
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../features/productsSlice";
-import { addFavorite, removeFavorite } from "../features/favoritesSlice"; // Import the favorite actions
+import { addFavorite, removeFavorite } from "../features/favoritesSlice";
 import {
   Table,
   TableBody,
@@ -19,22 +17,12 @@ import editIcon from "../assets/edit-icon.svg";
 import starIcon from "../assets/star.svg";
 import favouriteIcon from "../assets/starred.svg";
 
-const ProductTable = () => {
+const TableFav = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.items);
-  const favorites = useSelector((state) => state.favorites.items);
-  const status = useSelector((state) => state.products.status);
-  const error = useSelector((state) => state.products.error);
 
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, status]);
+  const favorites = useSelector((state) => state.favorites.items); // Only favorite products
 
-  if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
-
+  // Handle adding/removing product to/from favorites
   const handleFavoriteClick = (product) => {
     const isFavorite = favorites.some((item) => item._id === product._id);
 
@@ -74,16 +62,21 @@ const ProductTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.sku}>
+          {/* Display only favorite products */}
+          {favorites.map((favorite) => (
+            <TableRow key={favorite._id}>
               <TableCell>
                 <Typography variant="h3" color="highlight">
-                  {product.sku}
+                  {favorite.sku}
                 </Typography>
               </TableCell>
               <TableCell>
-                {product.images && product.images.length > 0 ? (
-                  <img src={product.images[0]} alt={product.name} width={50} />
+                {favorite.images && favorite.images.length > 0 ? (
+                  <img
+                    src={favorite.images[0]}
+                    alt={favorite.name}
+                    width={50}
+                  />
                 ) : (
                   <img
                     src="/path/to/placeholder-image.png"
@@ -92,12 +85,11 @@ const ProductTable = () => {
                   />
                 )}
               </TableCell>
-
               <TableCell>
-                <Typography variant="h3">{product.name}</Typography>
+                <Typography variant="h3">{favorite.name}</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h3">{product.qty}</Typography>
+                <Typography variant="h3">{favorite.qty}</Typography>
               </TableCell>
               <TableCell sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <IconButton aria-label="delete">
@@ -106,13 +98,10 @@ const ProductTable = () => {
                 <IconButton aria-label="edit">
                   <img src={editIcon} alt="Edit" width="25" height="25" />
                 </IconButton>
-                <IconButton
-                  aria-label="star"
-                  onClick={() => handleFavoriteClick(product)} // Trigger favorite action
-                >
+                <IconButton onClick={() => handleFavoriteClick(favorite)}>
                   <img
                     src={
-                      favorites.some((item) => item._id === product._id)
+                      favorites.some((item) => item._id === favorite._id)
                         ? favouriteIcon // If product is in favorites
                         : starIcon // If product is not in favorites
                     }
@@ -130,4 +119,4 @@ const ProductTable = () => {
   );
 };
 
-export default ProductTable;
+export default TableFav;

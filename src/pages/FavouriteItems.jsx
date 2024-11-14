@@ -1,14 +1,11 @@
-// pages/MainPage.js
 import React from "react";
+import TableFav from "../components/TableFav";
 import { Link } from "react-router-dom";
 import { Button, Container, Box, Typography, Grid2 } from "@mui/material";
-
 import SearchBar from "../components/SearchBar";
-import ProductTable from "../components/ProductTable";
-
 import favouriteIcon from "../assets/starred.svg";
 
-function MainPage() {
+function FavouriteItems() {
   return (
     <Container maxWidth="lg">
       {/* Header Section */}
@@ -72,9 +69,9 @@ function MainPage() {
         </Grid2>
       </Box>
       {/* Product Table */}
-      <ProductTable />
+      <TableFav />
     </Container>
   );
 }
 
-export default MainPage;
+export default FavouriteItems;

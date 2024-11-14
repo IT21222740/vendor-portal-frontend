@@ -8,7 +8,7 @@ import theme from "./theme/theme";
 import Navbar from "./components/Navbar";
 
 import MainPage from "./pages/MainPage";
-import Favourites from "./pages/Favourites";
+import FavouriteItems from "./pages/FavouriteItems";
 import EditProduct from "./pages/EditProduct";
 import AddProduct from "./pages/AddProduct";
 
@@ -31,7 +31,7 @@ function App() {
             <Box sx={{ flex: 1, overflow: "auto" }}>
               <Routes>
                 <Route path="/" element={<MainPage />} />
-                <Route path="/favourites" element={<Favourites />} />
+                <Route path="/favourites" element={<FavouriteItems />} />
                 <Route path="/edit-product" element={<EditProduct />} />
                 <Route path="/add-product" element={<AddProduct />} />
               </Routes>
