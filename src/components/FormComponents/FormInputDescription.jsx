@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid2, TextField, Typography } from "@mui/material";
 
-function FormInputDescription() {
+function FormInputDescription({ value, onChange }) {
   return (
     <>
       <Grid2 marginBottom={2}>
@@ -9,7 +9,7 @@ function FormInputDescription() {
       </Grid2>
 
       <Grid2 size={12} sx={{ textAlign: "left" }}>
-        <Typography variant="secTextMed">
+        <Typography variant="secTextMed" color="highlight">
           A small description about the product
         </Typography>
       </Grid2>
@@ -21,6 +21,8 @@ function FormInputDescription() {
           multiline
           rows={4}
           sx={{ marginTop: 1 }}
+          value={value}
+          onChange={onChange}
         />
       </Grid2>
     </>

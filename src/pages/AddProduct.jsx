@@ -4,18 +4,37 @@ import ArrowIcon from "../assets/arrow.svg";
 import FormInput from "../components/FormComponents/FormInput";
 import FormInputDescription from "../components/FormComponents/FormInputDescription";
 import InputImages from "../components/FormComponents/InputImages";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../features/productsSlice";
 
 const AddProduct = () => {
+  const dispatch = useDispatch(); // Hook to dispatch actions
   const [sku, setSku] = useState("");
   const [name, setName] = useState("");
   const [qty, setQty] = useState("");
   const [description, setDescription] = useState("");
+  const [images, setImages] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    console.log(sku);
-    console.log("Form submitted");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const productData = new FormData(); // Create FormData to send files
+
+    // Append regular data
+    productData.append("sku", sku);
+    productData.append("name", name);
+    productData.append("qty", qty);
+    productData.append("description", description);
+
+    // Append each image to FormData
+    images.forEach((image) => {
+      productData.append("images", image);
+    });
+
+    // Dispatch the addProduct action and pass the form data
+    dispatch(addProduct(productData));
   };
+
   return (
     <Container maxWidth="lg">
       {/* Header Section */}
@@ -72,7 +91,7 @@ const AddProduct = () => {
           <Grid2 container spacing={2} alignItems="center" marginTop={8}>
             <FormInput
               label="Name"
-              onChange={(e) => setSku(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               value={name}
             />
             <FormInput
@@ -85,11 +104,14 @@ const AddProduct = () => {
           </Grid2>
 
           <Grid2 container alignItems="center" marginTop={8}>
-            <FormInputDescription />
+            <FormInputDescription
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            />
           </Grid2>
 
           <Grid2 size={12} alignItems="center" marginTop={8}>
-            <InputImages />
+            <InputImages images={images} setImages={setImages} />{" "}
           </Grid2>
 
           <Grid2 size={12} marginTop={8}>
