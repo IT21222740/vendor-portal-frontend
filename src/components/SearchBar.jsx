@@ -38,7 +38,7 @@ function SearchBar() {
         width: "680px",
         height: "64px",
         borderRadius: "50px",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#f0f0f0",
         overflow: "hidden",
       }}
     >
