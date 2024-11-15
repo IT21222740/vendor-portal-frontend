@@ -26,3 +26,30 @@ export const addProduct = async (productData) => {
     throw error; // Throw error to be caught in Redux slice
   }
 };
+
+// API function to delete a product
+export const deleteProduct = async (productId) => {
+  try {
+    const response = await api.delete(`/products/delete/${productId}`);
+    return response.data; // Return response
+  } catch (error) {
+    throw error; // Throw error to be caught in Redux slice
+  }
+};
+
+export const updateProduct = async (productId, productData) => {
+  try {
+    const response = await api.put(
+      `/products/update/${productId}`,
+      productData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set header for file upload
+        },
+      }
+    );
+    return response.data; // Return the updated product response
+  } catch (error) {
+    throw error; // Throw error to be caught in Redux slice
+  }
+};

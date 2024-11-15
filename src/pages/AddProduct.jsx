@@ -6,8 +6,10 @@ import FormInputDescription from "../components/FormComponents/FormInputDescript
 import InputImages from "../components/FormComponents/InputImages";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../features/productsSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch(); // Hook to dispatch actions
   const [sku, setSku] = useState("");
   const [name, setName] = useState("");
@@ -32,7 +34,13 @@ const AddProduct = () => {
     });
 
     // Dispatch the addProduct action and pass the form data
-    dispatch(addProduct(productData));
+
+    try {
+      dispatch(addProduct(productData));
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to update product:", error);
+    }
   };
 
   return (

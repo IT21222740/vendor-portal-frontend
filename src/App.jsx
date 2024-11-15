@@ -11,6 +11,7 @@ import MainPage from "./pages/MainPage";
 import FavouriteItems from "./pages/FavouriteItems";
 import EditProduct from "./pages/EditProduct";
 import AddProduct from "./pages/AddProduct";
+import SearchProductsPage from "./pages/SearchProductsPage";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
                 <Route path="/favourites" element={<FavouriteItems />} />
                 <Route path="/edit-product" element={<EditProduct />} />
                 <Route path="/add-product" element={<AddProduct />} />
+                <Route
+                  path="/search-products"
+                  element={<SearchProductsPage />}
+                />
               </Routes>
             </Box>
           </Grid2>
