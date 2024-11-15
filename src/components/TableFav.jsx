@@ -91,7 +91,13 @@ const TableFav = () => {
               <TableCell>
                 <Typography variant="h3">{favorite.qty}</Typography>
               </TableCell>
-              <TableCell sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <TableCell
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: 3,
+                }}
+              >
                 <IconButton aria-label="delete">
                   <img src={deleteIcon} alt="Delete" width="25" height="25" />
                 </IconButton>

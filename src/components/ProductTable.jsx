@@ -104,7 +104,9 @@ const ProductTable = () => {
                 Qty
               </Typography>
             </TableCell>
-            <TableCell></TableCell>
+            <TableCell>
+              <Typography variant="h3" color="secondary"></Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -133,7 +135,13 @@ const ProductTable = () => {
               <TableCell>
                 <Typography variant="h3">{product.qty}</Typography>
               </TableCell>
-              <TableCell sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <TableCell
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: 3,
+                }}
+              >
                 <IconButton
                   aria-label="delete"
                   onClick={() => handleOpen(product)}

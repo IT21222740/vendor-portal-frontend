@@ -20,7 +20,11 @@ function MainPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h1">Products</Typography>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Typography variant="h1" sx={{ color: "inherit" }}>
+            Products
+          </Typography>
+        </Link>
       </Box>
       <Box
         sx={{

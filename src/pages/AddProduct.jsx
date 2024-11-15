@@ -5,8 +5,9 @@ import FormInput from "../components/FormComponents/FormInput";
 import FormInputDescription from "../components/FormComponents/FormInputDescription";
 import InputImages from "../components/FormComponents/InputImages";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../features/productsSlice";
+import { addProduct, fetchProducts } from "../features/productsSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -36,8 +37,11 @@ const AddProduct = () => {
     // Dispatch the addProduct action and pass the form data
 
     try {
-      dispatch(addProduct(productData));
-      navigate("/");
+      await dispatch(addProduct(productData));
+      dispatch(fetchProducts());
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
       console.error("Failed to update product:", error);
     }
@@ -54,7 +58,11 @@ const AddProduct = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h1">Products</Typography>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Typography variant="h1" sx={{ color: "inherit" }}>
+            Products
+          </Typography>
+        </Link>
         <img
           src={ArrowIcon}
           alt="Arrow"
